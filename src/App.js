@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
 
 function makeSections(ary) {
   return ary.map(sec => {
@@ -17,18 +15,21 @@ function makeSections(ary) {
 class App extends Component {
   render() {
     const DB = window.DB;
-    const pageHead = DB.head;
     const sections = makeSections(DB.sections);
 
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1>{pageHead}</h1>
+      <div>
+        <div itemscope itemtype="http://schema.org/Book" itemid="#record">
+          <link itemprop="additionalType" href="http://schema.org/Product" />
+          <h1 itemprop="name">{DB.title}</h1>
+          <table summary="Bibliographic Details">
+            <tr>
+              <th>Author: </th>
+              <td itemprop="author">{DB.author}</td>
+            </tr>
+          </table>
         </div>
-        <p className="App-intro">
-          {sections}
-        </p>
+        {sections}
       </div>
     );
   }
